@@ -16,7 +16,7 @@ if(!isset($_SESSION))
 <div id="wrapper">
 
 	<!-- Sidebar -->
-	<div id="sidebar-wrapper">
+	<div id="sidebar-wrapper" style="z-index: -1;">
 		<ul class="sidebar-nav">
 			<li class="sidebar-brand">
 				<a href="#">

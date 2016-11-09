@@ -60,16 +60,56 @@ class Team
     public static function getOneTeam ($id) {
         include_once ('conn.php');
 	    global $mysqli;
-        $query = sprintf('SELECT name, arena FROM team WHERE id=%s', $id);
+        $query = sprintf('SELECT * FROM team WHERE id=%s', $id);
         if(!$result = $mysqli->query($query)) {
             echo "Error getting 1 team".$result->error;
             exit();
+        } if($result == null) {
+            echo $mysqli->error;
         }
         $team = $result->fetch_object();
-        return new Team($team->name, $team->arena);
+        $res = new Team($team->name, $team->arena);
+        $res->id = $team->id;
+        return $res;
 
 
     }
 
+    public static function deleteTeam($id)
+    {
+        include_once ('conn.php');
+        include_once ('playerClass.php');
+        include_once ('gameClass.php');
+//        global $mysqli;
+        $query = sprintf('DELETE FROM team WHERE id=%s', $id);
+        if(!$result = $mysqli->query($query)) {
+            echo "Error deleting team".$result->error;
+            exit();
+        } else {
+            Game::deleteGamesWithTeam($id);
+            Player::deletePlayersFromTeam($id);
+        }
+
+    }
+
+    public static function getPlayers($teamId)
+    {
+        include_once 'conn.php';
+        include_once 'playerClass.php';
+        global $mysqli;
+        $sql = sprintf('SELECT * FROM player WHERE teamId =%s',$teamId);
+        if(!$result = $mysqli->query($sql)) {
+            echo "ERROR".$mysqli->errno;
+            exit();
+        }
+        $arrayResult = array();
+        while($row = $result->fetch_object()) {
+            $player = new Player($row->name, $row->position, $row->height, $row->dob, $row->country, $row->teamId);
+            $player->id = $row->id;
+            array_push($arrayResult, $player);
+        }
+//        $mysqli->close();
+        return $arrayResult;
+    }
 
 }

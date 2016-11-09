@@ -5,7 +5,9 @@ if (!isset($_SESSION)) {
     session_start();
 }
 ?>
-
+<?php if (isset($_SESSION['game'])) { ?>
+    <h2 class="form-signin-heading loginError"><?php echo $_SESSION['game']; ?></h2>
+<?php } unset($_SESSION['game']); ?>
 <div class="container">
 
     <form class="form-signin" action="postAddGame.php" method="POST">

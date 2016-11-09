@@ -29,7 +29,7 @@ session_start();
                     <span class="glyphicon glyphicon-edit"></span>
                 </a>
                 &nbsp;
-                <a href="<?php echo 'deleteTeam.php?id =' .$team->id?>">
+                <a href="<?php echo 'deleteTeam.php?id=' .$team->id?>">
                     <span class="glyphicon glyphicon-trash"></span>
                 </a>
             </td>

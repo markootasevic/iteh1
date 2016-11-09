@@ -63,4 +63,16 @@ class Game
 		return $arrayResult;
 	}
 
+    public static function deleteGamesWithTeam($teamId)
+    {
+        include_once ('conn.php');
+        global $mysqli;
+        $query = sprintf('DELETE FROM game WHERE homeId = %s OR guestId = %s', $teamId, $teamId);
+        if(!$result = $mysqli->query($query)) {
+            echo "Error deleting team".$result->error;
+            exit();
+        }
+
+    }
+
 }

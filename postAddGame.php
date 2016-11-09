@@ -6,6 +6,16 @@ if(!isset($_SESSION)) {
 }
 
 if (isset($_POST['homeTeam']) && isset($_POST['homePts']) && isset($_POST['guestTeam']) && isset($_POST['guestPts'])) {
+    if($_POST['homeTeam'] == $_POST['guestTeam']) {
+        $_SESSION['game'] = "You selected the same team as home and guest, try again";
+        header("Location: addNewGame.php");
+        die();
+    }
+    if($_POST['homePts'] == $_POST['guestPts']) {
+        $_SESSION['game'] = "Game cannot be tied, try again";
+        header("Location: addNewGame.php");
+        die();
+    }
     $newGame = new Game($_POST['homePts'],  $_POST['guestPts'], $_POST['homeTeam'], $_POST['guestTeam']);
     $success = $newGame->insetInDb();
 	$mysqli->close();

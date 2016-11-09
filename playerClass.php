@@ -40,4 +40,16 @@ class Player
         }
     }
 
+    public static function deletePlayersFromTeam($teamId)
+    {
+        include_once ('conn.php');
+        global $mysqli;
+        $query = sprintf('DELETE FROM player WHERE teamId = %s', $teamId, $teamId);
+        if(!$result = $mysqli->query($query)) {
+            echo "Error deleting team".$result->error;
+            exit();
+        }
+
+    }
+
 }
