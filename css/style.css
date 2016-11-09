@@ -1,0 +1,9 @@
+.table.table-striped .minimal_cell {
+    background: none;
+    border-width: 0;
+}
+
+.loginError {
+    color: red;
+    text-align: center;
+}
