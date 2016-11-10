@@ -8,6 +8,12 @@ session_start();
 ?>
 
 <div class="container">
+    
+    <div style="display: inline">
+    <span><h3>SORT TABLE</h3></span>
+       <h3><a href="allTeams.php?sort=asc">ascending</a></h3>
+      <h3><a href="allTeams.php?sort=desc">descending</a></h3>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -17,7 +23,11 @@ session_start();
         </thead>
         <tbody>
         <?php
+        if(isset($_GET['sort'])) {
+            $teamArray = Team::getAllTeams($_GET['sort']);
+        }else {
             $teamArray = Team::getAllTeams();
+        }
             foreach ($teamArray as $team) {
                 ?>
         <tr class='clickable-row' data-href= <?php echo "editTeam.php?id=".$team->id; ?>>

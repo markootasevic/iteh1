@@ -36,7 +36,7 @@ class Game
 		include_once ('conn.php');
 		$query = sprintf('SELECT * FROM game WHERE id=%s', $id);
 		if(!$result = $mysqli->query($query)) {
-			echo "Error getting 1 team".$result->error;
+			echo "Error getting 1 team";
 			exit();
 		}
 		$game = $result->fetch_object();

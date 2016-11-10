@@ -52,4 +52,36 @@ class Player
 
     }
 
+    public static function getOnePlayerName($id)
+    {
+        include_once ('conn.php');
+        global $mysqli;
+        $query = sprintf('SELECT * FROM player WHERE id=%s', $id);
+        if(!$result = $mysqli->query($query)) {
+            echo "Error getting 1 team".$result->error;
+            exit();
+        } if($result == null) {
+        echo $mysqli->error;
+    }
+        $player = $result->fetch_object();
+//        $res = new Player($team->name, $team->arena);
+//        $res->id = $team->id;
+        return $player->name;
+    }
+
+    public static function getPlayerTeamName($id)
+    {
+        include_once ('conn.php');
+        global $mysqli;
+        $query = sprintf('SELECT t.name FROM team t JOIN player p on p.teamId = t.id WHERE p.id=%s', $id);
+        if(!$result = $mysqli->query($query)) {
+            echo "Error getting 1 team name";
+            exit();
+        } if($result == null) {
+        echo $mysqli->error;
+    }
+    $name = $result->fetch_object();
+        return $name->name;
+    }
+
 }

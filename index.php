@@ -12,39 +12,30 @@ if(!isset($_SESSION))
 ?>
 
 <link href="css/simple-sidebar.css" rel="stylesheet">
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">        </script>
+<script src="typeahead.min.js"></script>
 <div id="wrapper">
 
 	<!-- Sidebar -->
-	<div id="sidebar-wrapper" style="z-index: -1;">
+	<div id="sidebar-wrapper" style="z-index: 0;">
 		<ul class="sidebar-nav">
-			<li class="sidebar-brand">
-				<a href="#">
-					Start Bootstrap
-				</a>
+            <li>
+                <form action="redirect.php" method="get">
+                <input onkeydown="if (event.keyCode == 13) { this.form.submit(); return false; }" type="text" name="typeahead" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Choose a team">
+                </form>
+                <script>
+                    $(document).ready(function(){
+                        $('input.typeahead').typeahead({
+                            name: 'typeahead',
+                            remote:'search.php?key=%QUERY',
+                            limit : 10
+                        });
+                    });
+                </script>
 			</li>
-			<li>
-				<a href="#">Dashboard</a>
-			</li>
-			<li>
-				<a href="#">Shortcuts</a>
-			</li>
-			<li>
-				<a href="#">Overview</a>
-			</li>
-			<li>
-				<a href="#">Events</a>
-			</li>
-			<li>
-				<a href="#">About</a>
-			</li>
-			<li>
-				<a href="#">Services</a>
-			</li>
-			<li>
-				<a href="#">Contact</a>
-			</li>
+
 		</ul>
+
 	</div>
 	<!-- /#sidebar-wrapper -->
 
@@ -54,11 +45,15 @@ if(!isset($_SESSION))
 			<div class="row">
 				<div class="col-lg-12">
 					<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                    <?php
+                        global $index;
+                        $index = 1;
+                    ?>
 					<?php foreach ($allGames as $game)  {
 						$teamHome = Team::getOneTeam($game->homeId);
 						$teamGuest = Team::getOneTeam($game->guestId);
 						?>
-						<div> <?php if(intval($game->ptsHome) > intval($game->ptsGuest)) {
+						<div    > <?php if(intval($game->ptsHome) > intval($game->ptsGuest)) {
 								echo'<h2 style="text-align:left;float:left;"> <span class="label label-default">L</span>'.' '.$teamGuest->name.' '.$game->ptsGuest.' - '. '</h2>';
 								echo'<h2 style="text-align:left;float:left;">'.$game->ptsHome.' '.$teamHome->name.' <span class="label label-default">W</span> </h2>';
 							} else {
@@ -66,6 +61,7 @@ if(!isset($_SESSION))
 								echo'<h2 style="text-align:right;float:left;">'.$game->ptsHome.' '.$teamHome->name.' <span class="label label-default">L</span> </h2>';
 							}
 							?>
+                            <a href="<?php echo 'oneGame.php?id='.$game->id; ?>"><h2 style="text-align:left;float:left;"> See stats</h2></a>
 						</div>
 						<br style="clear:both;">
 					<?php }?>
@@ -73,6 +69,8 @@ if(!isset($_SESSION))
 			</div>
 		</div>
 	</div>
+
+
 	<!-- /#page-content-wrapper -->
 
 </div>

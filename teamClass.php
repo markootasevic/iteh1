@@ -39,10 +39,15 @@ class Team
 
     }
 
-    public static function getAllTeams() {
+    public static function getAllTeams($sort = "") {
         include_once 'conn.php';
 //        global $mysqli;
-        $sql = "SELECT * FROM team";
+        if($sort != "") {
+            $sql = sprintf("SELECT * FROM team ORDER BY name %s", $sort);
+        }
+        else {
+            $sql = "SELECT * FROM team";
+        }
         if(!$result = $mysqli->query($sql)) {
             echo "ERROR".$mysqli->errno;
             exit();
@@ -73,6 +78,20 @@ class Team
         return $res;
 
 
+    }
+
+    public static function getTeamIdByName($name) {
+        include_once ('conn.php');
+        global $mysqli;
+        $query = sprintf('SELECT id FROM team WHERE name="%s"', $name);
+        if(!$result = $mysqli->query($query)) {
+            echo "Error getting 1 team";
+            exit();
+        } if($result == null) {
+            echo $mysqli->error;
+        }
+        $team = $result->fetch_object();
+        return $team->id;
     }
 
     public static function deleteTeam($id)
