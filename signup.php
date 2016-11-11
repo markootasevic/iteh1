@@ -9,7 +9,7 @@ include_once ('header.php');
             session_start();
         }
             if(isset($_SESSION['signup'])) {
-                echo "<h2 class=\"form-signin-heading loginError\">That username is already taken, try another one</h2>";
+                echo '<h2 class="form-signin-heading loginError">'.$_SESSION['signup'].'</h2>';
 
                 unset($_SESSION['signup']);
             }

@@ -31,7 +31,7 @@ session_start();
             foreach ($teamArray as $team) {
                 ?>
         <tr class='clickable-row' data-href= <?php echo "editTeam.php?id=".$team->id; ?>>
-<!--            stavi da je link vodi na stranicu tog tima-->
+
             <td><?php echo $team->name?></td>
             <td><?php echo $team->arena?></td>
             <td class="minimal_cell">
