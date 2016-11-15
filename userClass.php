@@ -13,7 +13,7 @@ class User
     public $id;
     public function __construct($name, $password)
     {
-        $this->user = $name;
+        $this->name = $name;
         $this->pass = $password;
     }
 
