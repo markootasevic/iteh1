@@ -25,7 +25,7 @@ if (isset($_SESSION['addPlayer'])) {
                 </select>
         <label for="inputEmail" class="sr-only">Name</label>
         <input type="text" name="name" id="inputEmail" class="form-control" placeholder="Name" required autofocus>
-        <input type="text" name="height" id="inputEmail" class="form-control" placeholder="Height" required autofocus>
+        <input type="number" name="height" id="inputEmail" class="form-control" placeholder="Height" required autofocus>
         <input type="text" name="country" id="inputEmail" class="form-control" placeholder="Country of birth" required autofocus>
         <input type="date" name="dob" id="inputEmail" class="form-control" placeholder="Date of birth" required autofocus>
         <select class="form-control" name="position">

@@ -2,7 +2,9 @@
 include_once ('header.php');
 ?>
     <?php if (isset($_SESSION['logedin']) && $_SESSION['logedin'] == 0 ) { ?>
+
 <h2 class="form-signin-heading loginError">Username or password is wrong,please try again</h2>
+
 <?php } unset($_SESSION['logedin']); ?>
     <div class="container">
 

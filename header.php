@@ -26,7 +26,7 @@ if(!isset($_SESSION))
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="/iteh1">Nba stats</a>
+      <a class="navbar-brand" href="index.php">Nba stats</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">

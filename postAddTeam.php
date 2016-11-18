@@ -5,7 +5,7 @@ if(!isset($_SESSION)) {
 }
 
 if (isset($_POST['name']) && isset($_POST['arena'])) {
-    $newTeam = new Team($_POST['name'], $_POST['arena']);
+    $newTeam = new Team(trim($_POST['name']), trim($_POST['arena']));
     $success = $newTeam->insertInDb();
     if($success == 1) {
         header("Location: allTeams.php");

@@ -15,7 +15,7 @@ if(!isset($_SESSION))
 		    header("Location: signup.php");
             exit();
         }
-		$newUser = new User($_POST['name'], $_POST['pass']);
+		$newUser = new User(trim($_POST['name']), $_POST['pass']);
          $success = $newUser->insertInDb();
                 if($success == 1) {
                     $_SESSION['logedin'] = 1;
